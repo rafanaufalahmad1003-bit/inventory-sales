@@ -178,4 +178,35 @@ class SaleTransactionTest extends TestCase
         $sale->refresh();
         $this->assertEquals('cancelled', $sale->status);
     }
+
+    public function test_customer_can_self_book_rental_online(): void
+    {
+        $pelangganUser = User::factory()->create([
+            'role' => 'pelanggan',
+            'email' => 'customer.test@example.com',
+        ]);
+
+        $response = $this->actingAs($pelangganUser)->post('/booking', [
+            'rental_start_date' => '2026-10-27',
+            'rental_end_date' => '2026-10-28', // 2 hari
+            'payment_method' => 'transfer',
+            'notes' => 'Dokumentasi video event',
+            'items' => [
+                ['product_id' => $this->camera->id, 'quantity' => 1],
+            ],
+        ]);
+
+        $response->assertSessionHasNoErrors();
+
+        // Stok kamera berkurang dari 5 menjadi 4
+        $this->camera->refresh();
+        $this->assertEquals(4, $this->camera->stock);
+
+        // Header sale tersimpan dengan type rental dan total (300.000 * 1 unit * 2 hari = 600.000)
+        $this->assertDatabaseHas('sales', [
+            'type' => 'rental',
+            'total' => 600000,
+            'status' => 'completed',
+        ]);
+    }
 }

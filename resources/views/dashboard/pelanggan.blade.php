@@ -10,9 +10,12 @@
         </h3>
         <p class="text-secondary small mb-0">Selamat datang di portal rental kamera & gear studio LensRent. Pantau gear yang sedang Anda sewa dan riwayat transaksi Anda.</p>
     </div>
-    <div class="col-md-4 text-md-end mt-3 mt-md-0">
-        <a href="{{ route('products.index') }}" class="btn btn-primary d-inline-flex align-items-center gap-1 shadow-sm">
-            <i class="bi bi-grid"></i> Lihat Katalog Rental Kamera
+    <div class="col-md-4 text-md-end mt-3 mt-md-0 d-flex gap-2 justify-content-md-end">
+        <a href="{{ route('booking.create') }}" class="btn btn-primary d-inline-flex align-items-center gap-1 shadow-sm">
+            <i class="bi bi-cart-plus"></i> Pesan / Sewa Kamera
+        </a>
+        <a href="{{ route('products.index') }}" class="btn btn-outline-secondary d-inline-flex align-items-center gap-1">
+            <i class="bi bi-grid"></i> Katalog
         </a>
     </div>
 </div>
@@ -112,12 +115,17 @@
                     <span class="badge bg-light text-secondary border mb-2 align-self-start">{{ $prod->category->name }}</span>
                     <h6 class="fw-bold text-dark mb-1">{{ $prod->name }}</h6>
                     <div class="text-muted small mb-2 font-monospace">{{ $prod->sku }}</div>
-                    <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
-                        <div>
-                            <span class="text-muted small d-block">Tarif Sewa:</span>
-                            <span class="fw-bold text-primary">Rp {{ number_format($prod->selling_price, 0, ',', '.') }}/hari</span>
+                    <div class="mt-auto pt-2 border-top">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div>
+                                <span class="text-muted small d-block">Tarif Sewa:</span>
+                                <span class="fw-bold text-primary">Rp {{ number_format($prod->selling_price, 0, ',', '.') }}/hari</span>
+                            </div>
+                            <span class="badge bg-success-subtle text-success">Stok: {{ $prod->stock }}</span>
                         </div>
-                        <span class="badge bg-success-subtle text-success">Stok: {{ $prod->stock }}</span>
+                        <a href="{{ route('booking.create', ['product_id' => $prod->id]) }}" class="btn btn-sm btn-primary w-100 py-1">
+                            <i class="bi bi-cart-plus me-1"></i> Sewa Gear Ini
+                        </a>
                     </div>
                 </div>
             </div>

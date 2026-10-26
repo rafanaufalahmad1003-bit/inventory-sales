@@ -36,6 +36,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
 
+    // Pemesanan Mandiri Rental Kamera oleh Pelanggan (Online Booking)
+    Route::get('/booking', [SaleController::class, 'bookingCreate'])->name('booking.create');
+    Route::post('/booking', [SaleController::class, 'bookingStore'])->name('booking.store');
+
     // Rute Operasional Staff, Admin, dan Owner (Master Data & Transaksi)
     Route::middleware('role:staff,admin,owner')->group(function () {
         // Produk (Create, Edit, Update)

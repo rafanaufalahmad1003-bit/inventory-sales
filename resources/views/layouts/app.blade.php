@@ -97,7 +97,12 @@
                     @if(auth()->user()->isPelanggan())
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('products.*') ? 'active text-primary fw-semibold' : '' }}" href="{{ route('products.index') }}">
-                                <i class="bi bi-camera me-1"></i> Katalog Rental Kamera
+                                <i class="bi bi-camera me-1"></i> Katalog Kamera
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->routeIs('booking.*') ? 'active text-primary fw-semibold' : '' }}" href="{{ route('booking.create') }}">
+                                <i class="bi bi-cart-plus me-1"></i> Pesan / Sewa Kamera
                             </a>
                         </li>
                     @else

@@ -40,7 +40,15 @@
                 </div>
             </div>
 
-            @if(!auth()->user()->isPelanggan())
+            @if(auth()->user()->isPelanggan())
+                @if($product->stock > 0)
+                <div class="d-grid gap-2 mt-4">
+                    <a href="{{ route('booking.create', ['product_id' => $product->id]) }}" class="btn btn-primary btn-lg shadow-sm">
+                        <i class="bi bi-cart-plus me-1"></i> Sewa Gear Ini Sekarang
+                    </a>
+                </div>
+                @endif
+            @else
             <div class="d-grid gap-2 mt-4">
                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-primary">
                     <i class="bi bi-pencil me-1"></i> Ubah Data Produk

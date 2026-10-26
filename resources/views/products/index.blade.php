@@ -126,7 +126,13 @@
                                 <i class="bi bi-eye"></i>
                             </a>
 
-                            @if(!auth()->user()->isPelanggan())
+                            @if(auth()->user()->isPelanggan())
+                                @if($product->stock > 0)
+                                    <a href="{{ route('booking.create', ['product_id' => $product->id]) }}" class="btn btn-primary" title="Sewa Gear Ini">
+                                        <i class="bi bi-cart-plus me-1"></i> Sewa
+                                    </a>
+                                @endif
+                            @else
                                 <a href="{{ route('products.edit', $product->id) }}" class="btn btn-outline-primary" title="Ubah">
                                     <i class="bi bi-pencil"></i>
                                 </a>
