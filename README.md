@@ -352,3 +352,5 @@ inventory-sales/
 ## 10. Lisensi & Pernyataan Orisinalitas
 
 Proyek ini dibangun secara mandiri untuk memenuhi kriteria penilaian **Ujian Tengah Semester (UTS) Web Programming 2**, menerapkan kaidah standar pengembangan Laravel modern (*Clean Code*, *Database Transaction*, *Eloquent Relationship*, *Server-side Validation*, dan *Role-based Authorization*).
+#   i n v e n t o r y - s a l e s  
+ 
